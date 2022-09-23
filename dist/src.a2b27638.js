@@ -244,7 +244,7 @@ function _getapi() {
 }
 
 function nayta(data) {
-  var taulukko = "<thead id=\"OtsikkoKohde\">\n    <th>Municipality</th>\n    <th>Population</th>\n  </thead>";
+  var taulukko = "<thead>\n    <th>Municipality</th>\n    <th>Population</th>\n  </thead>\n  <tbody>\n  </tbody>\n  ";
 
   var _iterator = _createForOfIteratorHelper(data.list),
       _step;
