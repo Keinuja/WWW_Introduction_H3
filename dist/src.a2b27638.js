@@ -244,7 +244,7 @@ function _getapi() {
             data2 = _context.sent;
             nayta(data);
             lisaa(data2);
-            laske_osuus();
+            laske_osuus(data, data2);
 
           case 15:
           case "end":
@@ -257,7 +257,7 @@ function _getapi() {
 }
 
 function nayta(data) {
-  var taulukko = "<thead>\n    <th>Municipality</th>\n    <th>Population</th>\n  </thead>\n  <tbody>\n  </tbody>\n  ";
+  var taulukko = "<thead>\n    <th>Municipality</th>\n    <th>Population</th>\n    </thead>\n    <tbody>\n    </tbody>\n    ";
 
   var _iterator = _createForOfIteratorHelper(data.list),
       _step;
@@ -265,7 +265,7 @@ function nayta(data) {
   try {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var r = _step.value;
-      taulukko += "<tr>\n        <td>".concat(r.dataset.dimension.Alue.category.label, "</td>\n        <td>").concat(r.dataset.value, "</td>\n      </tr>");
+      taulukko += "<tr>\n        <td>".concat(r.data.dimension.Alue.category.label, "</td>\n        <td>").concat(r.data.value, "</td>\n        </tr>");
     }
   } catch (err) {
     _iterator.e(err);
@@ -277,7 +277,7 @@ function nayta(data) {
 }
 
 function lisaa(data) {
-  var sarake = "<thead>\n    <th>Employment amount</th>\n  </thead>\n  <tbody>\n  </tbody>\n  ";
+  var sarake = "<thead>\n    <th>Employment amount</th>\n    </thead>\n    <tbody>\n    </tbody>\n    ";
 
   var _iterator2 = _createForOfIteratorHelper(data.list),
       _step2;
@@ -285,12 +285,33 @@ function lisaa(data) {
   try {
     for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
       var c = _step2.value;
-      sarake += "<tr>\n        <td>".concat(c.dataset.value, "</td>\n      </tr>");
+      sarake += "<tr>\n        <td>".concat(c.data.value, "</td>\n        </tr>");
     }
   } catch (err) {
     _iterator2.e(err);
   } finally {
     _iterator2.f();
+  }
+
+  document.getElementById("HTML-taulukko").innerHTML = sarake;
+}
+
+function laske_osuus(data, data2) {
+  var sarake = "<thead>\n    <th>Employment amount</th>\n    </thead>\n    <tbody>\n    </tbody>\n    ";
+
+  var _iterator3 = _createForOfIteratorHelper(data.list),
+      _step3;
+
+  try {
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var n = _step3.value;
+      var osuus = n.data.value / n.data2.value;
+      sarake += "<tr>\n        <td>".concat(osuus, "</td>\n        </tr>");
+    }
+  } catch (err) {
+    _iterator3.e(err);
+  } finally {
+    _iterator3.f();
   }
 
   document.getElementById("HTML-taulukko").innerHTML = sarake;

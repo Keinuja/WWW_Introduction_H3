@@ -13,23 +13,23 @@ async function getapi(osoite) {
   var data2 = await vastaus2.json();
   nayta(data);
   lisaa(data2);
-  laske_osuus();
+  laske_osuus(data, data2);
 }
 
 function nayta(data) {
   let taulukko = `<thead>
     <th>Municipality</th>
     <th>Population</th>
-  </thead>
-  <tbody>
-  </tbody>
-  `;
+    </thead>
+    <tbody>
+    </tbody>
+    `;
 
   for (var r of data.list) {
     taulukko += `<tr>
-        <td>${r.dataset.dimension.Alue.category.label}</td>
-        <td>${r.dataset.value}</td>
-      </tr>`;
+        <td>${r.data.dimension.Alue.category.label}</td>
+        <td>${r.data.value}</td>
+        </tr>`;
   }
   document.getElementById("HTML-taulukko").innerHTML = taulukko;
 }
@@ -37,15 +37,32 @@ function nayta(data) {
 function lisaa(data) {
   let sarake = `<thead>
     <th>Employment amount</th>
-  </thead>
-  <tbody>
-  </tbody>
-  `;
+    </thead>
+    <tbody>
+    </tbody>
+    `;
 
   for (var c of data.list) {
     sarake += `<tr>
-        <td>${c.dataset.value}</td>
-      </tr>`;
+        <td>${c.data.value}</td>
+        </tr>`;
+  }
+  document.getElementById("HTML-taulukko").innerHTML = sarake;
+}
+
+function laske_osuus(data, data2) {
+  let sarake = `<thead>
+    <th>Employment amount</th>
+    </thead>
+    <tbody>
+    </tbody>
+    `;
+
+  for (var n of data.list) {
+    var osuus = n.data.value / n.data2.value;
+    sarake += `<tr>
+        <td>${osuus}</td>
+        </tr>`;
   }
   document.getElementById("HTML-taulukko").innerHTML = sarake;
 }
