@@ -209,6 +209,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var osoite = "https://statfin.stat.fi/PxWeb/sq/4e244893-7761-4c4f-8e55-7a8d41d86eff";
+var osoite2 = "https://statfin.stat.fi/PxWeb/sq/5e288b40-f8c8-4f1e-b3b0-61b86ce5c065";
 
 function getapi(_x) {
   return _getapi.apply(this, arguments);
@@ -216,7 +217,7 @@ function getapi(_x) {
 
 function _getapi() {
   _getapi = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(osoite) {
-    var vastaus, data;
+    var vastaus, vastaus2, data, data2;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -227,13 +228,25 @@ function _getapi() {
           case 2:
             vastaus = _context.sent;
             _context.next = 5;
-            return vastaus.json();
+            return fetch(osoite2);
 
           case 5:
-            data = _context.sent;
-            nayta(data);
+            vastaus2 = _context.sent;
+            _context.next = 8;
+            return vastaus.json();
 
-          case 7:
+          case 8:
+            data = _context.sent;
+            _context.next = 11;
+            return vastaus2.json();
+
+          case 11:
+            data2 = _context.sent;
+            nayta(data);
+            lisaa(data2);
+            laske_osuus();
+
+          case 15:
           case "end":
             return _context.stop();
         }
@@ -261,6 +274,26 @@ function nayta(data) {
   }
 
   document.getElementById("HTML-taulukko").innerHTML = taulukko;
+}
+
+function lisaa(data) {
+  var sarake = "<thead>\n    <th>Employment amount</th>\n  </thead>\n  <tbody>\n  </tbody>\n  ";
+
+  var _iterator2 = _createForOfIteratorHelper(data.list),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var c = _step2.value;
+      sarake += "<tr>\n        <td>".concat(c.dataset.value, "</td>\n      </tr>");
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+
+  document.getElementById("HTML-taulukko").innerHTML = sarake;
 }
 
 getapi(osoite);
@@ -292,7 +325,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39275" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39675" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
