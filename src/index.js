@@ -10,10 +10,13 @@ async function getapi(osoite) {
 }
 
 function nayta(data) {
-  let taulukko = `<thead id="OtsikkoKohde">
+  let taulukko = `<thead>
     <th>Municipality</th>
     <th>Population</th>
-  </thead>`;
+  </thead>
+  <tbody>
+  </tbody>
+  `;
 
   for (let r of data.list) {
     taulukko += `<tr>

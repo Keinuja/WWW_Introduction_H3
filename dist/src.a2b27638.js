@@ -244,7 +244,7 @@ function _getapi() {
 }
 
 function nayta(data) {
-  var taulukko = "<thead id=\"OtsikkoKohde\">\n    <th>Municipality</th>\n    <th>Population</th>\n  </thead>";
+  var taulukko = "<thead>\n    <th>Municipality</th>\n    <th>Population</th>\n  </thead>\n  <tbody>\n  </tbody>\n  ";
 
   var _iterator = _createForOfIteratorHelper(data.list),
       _step;
@@ -292,7 +292,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42327" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39275" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
